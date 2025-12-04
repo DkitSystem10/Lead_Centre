@@ -818,10 +818,24 @@
   /* Rotating letters container */
   .rotating-letters-container {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 256px;
+    height: 256px;
     transform-origin: center center;
     animation: rotateCircle 20s linear infinite;
+  }
+
+  @media (min-width: 640px) {
+    .rotating-letters-container {
+      width: 320px;
+      height: 320px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .rotating-letters-container {
+      width: 400px;
+      height: 400px;
+    }
   }
 
   @keyframes rotateCircle {
@@ -838,14 +852,17 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 64px;
-    height: 64px;
-    margin-left: -32px;
-    margin-top: -32px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
     /* Rotate around the center, then move outwards to form the inner circle radius */
     transform-origin: center center;
     /* Radius of inner circle (where letters sit) */
-    --radius: 140px;
+  }
+
+  .rotating-letter {
+    --radius: 90px;
     /* Start invisible and scaled down */
     transform: rotate(var(--angle)) translateY(calc(-1 * var(--radius))) scale(0);
     opacity: 0;
@@ -856,6 +873,26 @@
     transition: transform 0.3s ease-out, z-index 0s;
     cursor: pointer;
     z-index: 1;
+  }
+
+  @media (min-width: 640px) {
+    .rotating-letter {
+      width: 48px;
+      height: 48px;
+      margin-left: -24px;
+      margin-top: -24px;
+      --radius: 110px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .rotating-letter {
+      width: 64px;
+      height: 64px;
+      margin-left: -32px;
+      margin-top: -32px;
+      --radius: 140px;
+    }
   }
 
   /* Hover effect - zoom in on hover */
@@ -890,8 +927,8 @@
   /* Outer highlight circle - appears after all letters zoom in (last letter at 1.8s + 0.5s animation = 2.3s) */
   .outer-highlight-circle {
     position: absolute;
-    width: 420px;
-    height: 420px;
+    width: 270px;
+    height: 270px;
     border: 3px solid #3D98B4;
     border-radius: 50%;
     opacity: 0;
@@ -901,6 +938,20 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  @media (min-width: 640px) {
+    .outer-highlight-circle {
+      width: 330px;
+      height: 330px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .outer-highlight-circle {
+      width: 420px;
+      height: 420px;
+    }
   }
 
   @keyframes highlightCircle {
@@ -964,28 +1015,6 @@
       transform: scale(0.9);
       box-shadow: 0 0 0 rgba(0, 255, 136, 0);
     }
-  }
-
-  /* Blinking green outline */
-  @keyframes blinkOutline {
-    0% {
-      opacity: 0;
-      box-shadow: 0 0 0 rgba(0, 255, 136, 0);
-    }
-    50% {
-      opacity: 1;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.8), 0 0 40px rgba(0, 255, 136, 0.4);
-    }
-    100% {
-      opacity: 0;
-      box-shadow: 0 0 0 rgba(0, 255, 136, 0);
-    }
-  }
-
-  .blinking-outline {
-    opacity: 0;
-    animation: blinkOutline 2s ease-in-out infinite;
-    animation-delay: 1s; /* Start blinking after letters appear */
   }
 
   /* Blinking green outline */

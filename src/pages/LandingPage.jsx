@@ -15,9 +15,25 @@ const LandingPage = () => {
     const updateLines = () => {
       if (!svgRef.current) return
       
-      const radius = 140
-      const centerX = 200
-      const centerY = 200
+      // Responsive sizing based on screen width
+      const isMobile = window.innerWidth < 640 // sm breakpoint
+      const isTablet = window.innerWidth < 768 // md breakpoint
+      
+      let radius, centerX, centerY
+      if (isMobile) {
+        radius = 90
+        centerX = 128
+        centerY = 128
+      } else if (isTablet) {
+        radius = 110
+        centerX = 160
+        centerY = 160
+      } else {
+        radius = 140
+        centerX = 200
+        centerY = 200
+      }
+      
       const angles = [0, 51.4, 102.8, 154.2, 205.6, 257, 308.4]
       
       const lines = svgRef.current.querySelectorAll('.connecting-line')
@@ -237,7 +253,7 @@ const LandingPage = () => {
             {/* Right: Animation with Infographic Elements */}
             <div className="relative flex items-center justify-center w-full md:w-auto" style={{ marginTop: '40px' }}>
               {/* Large teal circle background */}
-              <div className="relative w-96 h-96 flex items-center justify-center">
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center mx-auto">
                 {/* Outer circle that highlights after all letters zoom in */}
                 <div className="outer-highlight-circle" />
                 
@@ -271,71 +287,71 @@ const LandingPage = () => {
                     
                     {/* D */}
                     <div className="rotating-letter" style={{ '--angle': '0deg', '--delay': '0s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">D</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">D</span>
                       </div>
                     </div>
 
                     {/* U */}
                     <div className="rotating-letter" style={{ '--angle': '51.4deg', '--delay': '0.3s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">U</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">U</span>
                       </div>
                     </div>
 
                     {/* R */}
                     <div className="rotating-letter" style={{ '--angle': '102.8deg', '--delay': '0.6s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">R</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">R</span>
                       </div>
                     </div>
 
                     {/* K */}
                     <div className="rotating-letter" style={{ '--angle': '154.2deg', '--delay': '0.9s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">K</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">K</span>
                       </div>
                     </div>
 
                     {/* K */}
                     <div className="rotating-letter" style={{ '--angle': '205.6deg', '--delay': '1.2s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">K</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">K</span>
                       </div>
                     </div>
 
                     {/* A */}
                     <div className="rotating-letter" style={{ '--angle': '257deg', '--delay': '1.5s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">A</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">A</span>
                       </div>
                     </div>
 
                     {/* S */}
                     <div className="rotating-letter" style={{ '--angle': '308.4deg', '--delay': '1.8s' }}>
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg" style={{ 
                         background: 'linear-gradient(135deg, #409891 0%, #48ADB7 100%)',
                         boxShadow: '0 4px 15px rgba(64, 152, 145, 0.3), 0 0 20px rgba(72, 173, 183, 0.2)'
                       }}>
-                        <span className="text-xl font-bold text-white">S</span>
+                        <span className="text-sm sm:text-base md:text-xl font-bold text-white">S</span>
                       </div>
                     </div>
                   </div>
@@ -343,8 +359,8 @@ const LandingPage = () => {
 
                 {/* Central Circle with LEAD */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="bg-white border-2 rounded-full w-28 h-28 flex items-center justify-center shadow-lg" style={{ borderColor: '#3D98B4' }}>
-                    <h1 className="text-base md:text-lg font-bold text-center tracking-wide" style={{ color: '#3D98B4' }}>
+                  <div className="bg-white border-2 rounded-full w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 flex items-center justify-center shadow-lg" style={{ borderColor: '#3D98B4' }}>
+                    <h1 className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-center tracking-wide" style={{ color: '#3D98B4' }}>
                       LEAD
                     </h1>
                   </div>

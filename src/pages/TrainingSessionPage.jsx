@@ -256,23 +256,23 @@ const TrainingSessionPage = () => {
   // Main Categories View
   if (view === 'categories') {
     return (
-      <div className="container-custom py-12">
+      <div className="container-custom py-6 md:py-8 lg:py-12">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold mb-3" style={{ color: '#1F2937' }}>
+          <div className="text-center mb-8 md:mb-10 px-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-3" style={{ color: '#1F2937' }}>
               Course Enquiry / Registration
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">
               Select a category to get started
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 px-4 md:px-0">
             {mainCategories.map((category, index) => (
               <button
                 key={category.id}
                 onClick={() => handleCategoryClick(category.id)}
-                className="category-card group relative rounded-2xl p-8 shadow-md border-2 border-gray-200 hover:border-[#409891] transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
+                className="category-card group relative rounded-xl md:rounded-2xl p-6 md:p-8 shadow-md border-2 border-gray-200 hover:border-[#409891] transition-all duration-300 hover:shadow-xl hover:scale-105 overflow-hidden"
                 style={{
                   animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
                 }}
@@ -292,7 +292,7 @@ const TrainingSessionPage = () => {
                   <div className="category-icon">
                     {category.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-white drop-shadow-lg group-hover:text-[#48ADB7] transition-colors duration-300">
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white drop-shadow-lg group-hover:text-[#48ADB7] transition-colors duration-300">
                     {category.title}
                   </h3>
                 </div>
@@ -316,7 +316,7 @@ const TrainingSessionPage = () => {
     const selectedMainCategory = mainCategories.find(c => c.id === selectedCategory)
 
     return (
-      <div className="container-custom py-12">
+      <div className="container-custom py-6 md:py-8 lg:py-12">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={handleBackToCategories}
