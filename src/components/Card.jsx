@@ -44,7 +44,7 @@ const Card = ({ title, icon, image, link, description, index }) => {
                   }}
                 />
               </div>
-            </div>
+          </div>
             
             {/* Title */}
             <h3 className="text-2xl font-semibold mb-3 transition-all duration-300" style={{ 
@@ -52,19 +52,19 @@ const Card = ({ title, icon, image, link, description, index }) => {
               fontFamily: "'Inter', sans-serif",
               letterSpacing: '-0.02em'
             }}>
-              {title}
-            </h3>
+            {title}
+          </h3>
             
             {/* Description */}
-            {description && (
+          {description && (
               <p className="text-base leading-relaxed mb-6 flex-grow transition-all duration-300" style={{ 
                 color: '#666',
                 fontFamily: "'Inter', sans-serif",
                 lineHeight: '1.6'
               }}>
-                {description}
-              </p>
-            )}
+              {description}
+            </p>
+          )}
             
             {/* Button */}
             <button
@@ -95,7 +95,7 @@ const Card = ({ title, icon, image, link, description, index }) => {
             {/* Icon */}
             <div className="mb-6 transition-all duration-500 group-hover:scale-110 flex items-center justify-center" style={{ minHeight: '80px' }}>
               <span className="text-6xl transition-all duration-500">{icon}</span>
-            </div>
+        </div>
             
             {/* Title */}
             <h3 className="text-2xl font-semibold mb-3 transition-all duration-300" style={{ 

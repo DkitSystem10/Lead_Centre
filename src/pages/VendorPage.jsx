@@ -111,7 +111,7 @@ const VendorPage = () => {
     { 
       id: 'printing-vendors', 
       label: 'Printing Vendors',
-      image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1200&h=1200&fit=crop&q=90&auto=format',
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&h=1200&fit=crop&q=80',
       icon: (
         <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none">
           <defs>

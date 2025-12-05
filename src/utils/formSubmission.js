@@ -296,32 +296,20 @@ export const submitCareerGuidanceApplication = async (formData) => {
  */
 export const submitTrainingSessionApplication = async (formData) => {
   try {
-    // Collect assessment answers from form
-    // Map question IDs to questions for better structure
-    const assessment = {}
-    if (formData.assessment && typeof formData.assessment === 'object') {
-      // Transform assessment object to include question text
-      Object.keys(formData.assessment).forEach(questionId => {
-        assessment[`question_${questionId}`] = formData.assessment[questionId]
-      })
-    }
-
     const { data, error } = await supabase
-      .from('training_session_applications')
+      .from('course_enquiry_registrations')
       .insert([
         {
           date: formData.date,
           category: formData.category || null,
           sub_category: formData.subCategory || null,
-          trainer_name: formData.trainerName,
-          topic: formData.topic,
-          student_reg_no: formData.studentRegNo,
-          participant_name: formData.participantName,
-          gender: formData.gender,
+          name: formData.name || null,
           email: formData.email,
+          phone_number: formData.phoneNumber || null,
+          date_of_birth: formData.dateOfBirth || null,
+          age: formData.age ? parseInt(formData.age) : null,
           address: formData.address,
-          assessment: Object.keys(assessment).length > 0 ? assessment : null,
-          feedback: formData.feedback || null,
+          course_enquiry: formData.courseEnquiry || null,
           remarks: formData.remarks || null
         }
       ])
@@ -333,7 +321,7 @@ export const submitTrainingSessionApplication = async (formData) => {
     }
     return { success: true, data }
   } catch (error) {
-    console.error('Error submitting training session application:', error)
+    console.error('Error submitting course enquiry application:', error)
     throw error
   }
 }

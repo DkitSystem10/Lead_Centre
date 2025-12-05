@@ -164,8 +164,8 @@ const StudentInternshipPage = () => {
     const { name, value } = e.target
     setFormData(prev => {
       const updatedData = {
-        ...prev,
-        [name]: value
+      ...prev,
+      [name]: value
       }
       
       // Auto-calculate age when dob changes
@@ -425,43 +425,43 @@ const StudentInternshipPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <FormInput
-                  label="Email"
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  error={errors.email}
-                  required
-                  placeholder="example@email.com"
-                />
+            <FormInput
+              label="Email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              required
+              placeholder="example@email.com"
+            />
               </div>
               <div>
-                <FormInput
+            <FormInput
                   label="Contact Number"
                   type="tel"
                   name="contactNumber"
                   value={formData.contactNumber}
-                  onChange={handleChange}
+              onChange={handleChange}
                   error={errors.contactNumber}
-                  required
+              required
                   placeholder="Enter contact number"
-                />
+            />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <FormInput
-                  label="D.O.B"
-                  type="date"
-                  name="dob"
-                  value={formData.dob}
-                  onChange={handleChange}
-                  error={errors.dob}
-                  required
-                  max={new Date().toISOString().split('T')[0]}
-                />
+            <FormInput
+              label="D.O.B"
+              type="date"
+              name="dob"
+              value={formData.dob}
+              onChange={handleChange}
+              error={errors.dob}
+              required
+              max={new Date().toISOString().split('T')[0]}
+            />
               </div>
               <div>
                 <FormInput
@@ -494,15 +494,15 @@ const StudentInternshipPage = () => {
                 />
               </div>
               <div>
-                <FormSelect
-                  label="Gender"
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                  options={genderOptions}
-                  error={errors.gender}
-                  required
-                />
+            <FormSelect
+              label="Gender"
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
+              options={genderOptions}
+              error={errors.gender}
+              required
+            />
               </div>
             </div>
 
@@ -539,26 +539,26 @@ const StudentInternshipPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <FormSelect
-                  label="Internship Domain"
-                  name="internshipDomain"
-                  value={formData.internshipDomain}
-                  onChange={handleChange}
-                  options={internshipDomainOptions}
-                  error={errors.internshipDomain}
-                  required
-                />
+            <FormSelect
+              label="Internship Domain"
+              name="internshipDomain"
+              value={formData.internshipDomain}
+              onChange={handleChange}
+              options={internshipDomainOptions}
+              error={errors.internshipDomain}
+              required
+            />
               </div>
               <div>
-                <FormSelect
-                  label="Duration"
-                  name="duration"
-                  value={formData.duration}
-                  onChange={handleChange}
-                  options={durationOptions}
-                  error={errors.duration}
-                  required
-                />
+            <FormSelect
+              label="Duration"
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+              options={durationOptions}
+              error={errors.duration}
+              required
+            />
               </div>
             </div>
 

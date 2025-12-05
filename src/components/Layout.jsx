@@ -23,7 +23,8 @@ const Layout = ({ children }) => {
     <div className="min-h-screen flex flex-col">
       <Navbar onMenuClick={toggleSidebar} />
       <div className="flex flex-grow relative">
-        {showSidebar && <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />}
+        {/* Sidebar - Always available on mobile, conditional on desktop */}
+        <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} showOnDesktop={showSidebar} />
         <main className={`flex-grow w-full lg:w-auto ${isHomePage || isContactPage ? 'bg-white' : 'bg-[#F5F7FA]'}`}>
           {children}
         </main>

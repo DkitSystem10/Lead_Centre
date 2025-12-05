@@ -1,13 +1,23 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
+// Only throw error in production, allow development to continue with warnings
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables. Please check your .env file.')
+  if (import.meta.env.PROD) {
+    throw new Error('Missing Supabase environment variables. Please check your .env file or Vercel environment variables.')
+  } else {
+    console.warn('⚠️ Missing Supabase environment variables. Please create a .env file with VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY')
+    console.warn('⚠️ Some features may not work without proper Supabase configuration.')
+  }
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Create client with fallback empty strings if env vars are missing (for development)
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder-key'
+)
 
 /**
  * Upload a file to Supabase Storage

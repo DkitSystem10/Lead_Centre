@@ -181,26 +181,26 @@ const B2BPage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <FormSelect
-                  label="Business Type"
-                  name="businessType"
-                  value={formData.businessType}
-                  onChange={handleChange}
-                  options={businessTypeOptions}
-                  error={errors.businessType}
-                  required
-                />
+            <FormSelect
+              label="Business Type"
+              name="businessType"
+              value={formData.businessType}
+              onChange={handleChange}
+              options={businessTypeOptions}
+              error={errors.businessType}
+              required
+            />
               </div>
               <div>
-                <FormSelect
-                  label="Mode of Business"
-                  name="modeOfBusiness"
-                  value={formData.modeOfBusiness}
-                  onChange={handleChange}
-                  options={modeOfBusinessOptions}
-                  error={errors.modeOfBusiness}
-                  required
-                />
+            <FormSelect
+              label="Mode of Business"
+              name="modeOfBusiness"
+              value={formData.modeOfBusiness}
+              onChange={handleChange}
+              options={modeOfBusinessOptions}
+              error={errors.modeOfBusiness}
+              required
+            />
               </div>
             </div>
 

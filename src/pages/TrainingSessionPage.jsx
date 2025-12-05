@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import FormInput from '../components/FormInput'
 import FormSelect from '../components/FormSelect'
 import FormTextarea from '../components/FormTextarea'
-import { validateEmail, validateRequired, getTodayDate } from '../utils/validation'
+import { validateEmail, validateRequired, validatePhone, getTodayDate } from '../utils/validation'
 import { submitTrainingSessionApplication } from '../utils/formSubmission'
 
 const TrainingSessionPage = () => {
@@ -16,15 +16,13 @@ const TrainingSessionPage = () => {
     date: getTodayDate(),
     category: '',
     subCategory: '',
-    trainerName: '',
-    topic: '',
-    studentRegNo: '',
-    participantName: '',
-    gender: '',
+    name: '',
     email: '',
+    phoneNumber: '',
+    dateOfBirth: '',
+    age: '',
     address: '',
-    assessment: {},
-    feedback: '',
+    courseEnquiry: '',
     remarks: ''
   })
 
@@ -122,19 +120,6 @@ const TrainingSessionPage = () => {
     ]
   }
 
-  const genderOptions = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
-    { value: 'other', label: 'Other' },
-    { value: 'prefer-not-to-say', label: 'Prefer not to say' }
-  ]
-
-  // Sample Q&A questions for Assessment (Shuffle Model)
-  const assessmentQuestions = [
-    { id: 1, question: 'How would you rate the training session?', options: ['Excellent', 'Good', 'Average', 'Poor'] },
-    { id: 2, question: 'Was the content clear and understandable?', options: ['Yes', 'No', 'Partially'] },
-    { id: 3, question: 'Would you recommend this training to others?', options: ['Yes', 'No', 'Maybe'] }
-  ]
 
   const handleCategoryClick = (categoryId) => {
     setSelectedCategory(categoryId)
@@ -163,31 +148,50 @@ const TrainingSessionPage = () => {
     setSelectedSubCategory('')
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
+  // Calculate age from date of birth
+  const calculateAge = (dateOfBirth) => {
+    if (!dateOfBirth) return ''
     
-    // Handle assessment radio buttons
-    if (name.startsWith('assessment_')) {
-      const questionId = name.replace('assessment_', '')
-      setFormData(prev => ({
-        ...prev,
-        assessment: {
-          ...prev.assessment,
-          [questionId]: value
-        }
-      }))
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }))
+    const today = new Date()
+    const birthDate = new Date(dateOfBirth)
+    let age = today.getFullYear() - birthDate.getFullYear()
+    const monthDiff = today.getMonth() - birthDate.getMonth()
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--
     }
     
-    if (errors[name]) {
-      setErrors(prev => ({
+    return age >= 0 ? age.toString() : ''
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => {
+      const updatedData = {
         ...prev,
-        [name]: ''
-      }))
+        [name]: value
+      }
+      
+      // Auto-calculate age when D.O.B changes
+      if (name === 'dateOfBirth') {
+        updatedData.age = calculateAge(value)
+      }
+      
+      return updatedData
+    })
+    // Clear error for this field and age if D.O.B changes
+    if (errors[name]) {
+      setErrors(prev => {
+        const updatedErrors = {
+          ...prev,
+          [name]: ''
+        }
+        // Clear age error when D.O.B changes
+        if (name === 'dateOfBirth' && prev.age) {
+          updatedErrors.age = ''
+        }
+        return updatedErrors
+      })
     }
   }
 
@@ -200,28 +204,30 @@ const TrainingSessionPage = () => {
     if (!validateRequired(formData.subCategory)) {
       newErrors.subCategory = 'Sub-category is required'
     }
-    if (!validateRequired(formData.trainerName)) {
-      newErrors.trainerName = 'Trainer Name is required'
-    }
-    if (!validateRequired(formData.topic)) {
-      newErrors.topic = 'Topic is required'
-    }
-    if (!validateRequired(formData.studentRegNo)) {
-      newErrors.studentRegNo = 'Student Registration Number is required'
-    }
-    if (!validateRequired(formData.participantName)) {
-      newErrors.participantName = 'Participant Name is required'
-    }
-    if (!validateRequired(formData.gender)) {
-      newErrors.gender = 'Gender is required'
+    if (!validateRequired(formData.name)) {
+      newErrors.name = 'Name is required'
     }
     if (!validateRequired(formData.email)) {
       newErrors.email = 'Email is required'
     } else if (!validateEmail(formData.email)) {
       newErrors.email = 'Please enter a valid email address'
     }
+    if (!validateRequired(formData.phoneNumber)) {
+      newErrors.phoneNumber = 'Phone Number is required'
+    } else if (!validatePhone(formData.phoneNumber)) {
+      newErrors.phoneNumber = 'Please enter a valid phone number'
+    }
+    if (!validateRequired(formData.dateOfBirth)) {
+      newErrors.dateOfBirth = 'Date of Birth is required'
+    }
+    if (!validateRequired(formData.age)) {
+      newErrors.age = 'Age is required (calculated from D.O.B)'
+    }
     if (!validateRequired(formData.address)) {
       newErrors.address = 'Address is required'
+    }
+    if (!validateRequired(formData.courseEnquiry)) {
+      newErrors.courseEnquiry = 'Course Enquiry is required'
     }
 
     setErrors(newErrors)
@@ -398,57 +404,14 @@ const TrainingSessionPage = () => {
             />
 
             <FormInput
-              label="Trainer Name"
+              label="Name"
               type="text"
-              name="trainerName"
-              value={formData.trainerName}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
-              error={errors.trainerName}
+              error={errors.name}
               required
-              placeholder="Enter trainer name"
-            />
-
-            <FormInput
-              label="Topic"
-              type="text"
-              name="topic"
-              value={formData.topic}
-              onChange={handleChange}
-              error={errors.topic}
-              required
-              placeholder="Enter training topic"
-            />
-
-            <FormInput
-              label="Student Registration Number"
-              type="text"
-              name="studentRegNo"
-              value={formData.studentRegNo}
-              onChange={handleChange}
-              error={errors.studentRegNo}
-              required
-              placeholder="Enter student registration number"
-            />
-
-            <FormInput
-              label="Participant Name"
-              type="text"
-              name="participantName"
-              value={formData.participantName}
-              onChange={handleChange}
-              error={errors.participantName}
-              required
-              placeholder="Enter participant name"
-            />
-
-            <FormSelect
-              label="Gender"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              options={genderOptions}
-              error={errors.gender}
-              required
+              placeholder="Enter your full name"
             />
 
             <FormInput
@@ -462,6 +425,43 @@ const TrainingSessionPage = () => {
               placeholder="example@email.com"
             />
 
+            <FormInput
+              label="Phone Number"
+              type="tel"
+              name="phoneNumber"
+              value={formData.phoneNumber}
+              onChange={handleChange}
+              error={errors.phoneNumber}
+              required
+              placeholder="Enter your phone number"
+            />
+
+            {/* D.O.B and Age side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormInput
+                label="Date of Birth (D.O.B)"
+                type="date"
+                name="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                error={errors.dateOfBirth}
+                required
+                placeholder="Select date of birth"
+              />
+              <FormInput
+                label="Age"
+                type="text"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                error={errors.age}
+                required
+                placeholder="Auto-calculated"
+                disabled
+                className="bg-gray-50"
+              />
+            </div>
+
             <FormTextarea
               label="Address"
               name="address"
@@ -469,51 +469,18 @@ const TrainingSessionPage = () => {
               onChange={handleChange}
               error={errors.address}
               required
-              placeholder="Enter address"
+              placeholder="Enter your address"
               rows={3}
             />
 
-            <div className="mb-4">
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
-                Assessment (Q/A - Shuffle Model)
-              </label>
-              <div className="space-y-4 border-2 rounded-xl p-6" style={{ 
-                borderColor: 'rgba(64, 152, 145, 0.3)',
-                backgroundColor: '#F8FBFD'
-              }}>
-                {assessmentQuestions.map((q) => (
-                  <div key={q.id} className="mb-4">
-                    <p className="text-sm font-medium text-gray-700 mb-2">{q.question}</p>
-                    <div className="space-y-2">
-                      {q.options.map((option, idx) => (
-                        <label key={idx} className="flex items-center cursor-pointer hover:text-[#409891] transition-colors">
-                          <input
-                            type="radio"
-                            name={`assessment_${q.id}`}
-                            value={option}
-                            onChange={handleChange}
-                            checked={formData.assessment[q.id] === option}
-                            className="mr-3"
-                            style={{
-                              accentColor: '#409891'
-                            }}
-                          />
-                          <span className="text-sm text-gray-700 font-medium">{option}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <FormTextarea
-              label="Feedback"
-              name="feedback"
-              value={formData.feedback}
+              label="Course Enquiry"
+              name="courseEnquiry"
+              value={formData.courseEnquiry}
               onChange={handleChange}
-              error={errors.feedback}
-              placeholder="Your feedback about the training session"
+              error={errors.courseEnquiry}
+              required
+              placeholder="Please provide details about the course you are enquiring about"
               rows={4}
             />
 
@@ -524,7 +491,7 @@ const TrainingSessionPage = () => {
               onChange={handleChange}
               error={errors.remarks}
               placeholder="Any additional remarks (optional)"
-              rows={4}
+              rows={3}
             />
 
             <div className="flex flex-col sm:flex-row gap-3 pt-6 border-t" style={{ borderColor: 'rgba(64, 152, 145, 0.2)' }}>

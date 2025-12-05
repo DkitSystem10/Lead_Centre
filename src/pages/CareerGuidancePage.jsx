@@ -218,8 +218,8 @@ const CareerGuidancePage = () => {
     const { name, value } = e.target
     setFormData(prev => {
       const updatedData = {
-        ...prev,
-        [name]: value
+      ...prev,
+      [name]: value
       }
       
       // Auto-calculate age when dateOfBirth changes
@@ -461,19 +461,19 @@ const CareerGuidancePage = () => {
                 error={errors.dateOfBirth}
                 required
               />
-              <FormInput
-                label="Age"
-                type="number"
-                name="age"
-                value={formData.age}
-                onChange={handleChange}
-                error={errors.age}
-                required
+            <FormInput
+              label="Age"
+              type="number"
+              name="age"
+              value={formData.age}
+              onChange={handleChange}
+              error={errors.age}
+              required
                 placeholder="Auto-calculated from DOB"
-                min="1"
-                max="100"
+              min="1"
+              max="100"
                 readOnly
-              />
+            />
             </div>
 
             <FormSelect
@@ -508,16 +508,16 @@ const CareerGuidancePage = () => {
                 required
                 placeholder="example@email.com"
               />
-              <FormInput
-                label="Contact Number"
-                type="tel"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                error={errors.contactNumber}
-                required
-                placeholder="Enter contact number"
-              />
+            <FormInput
+              label="Contact Number"
+              type="tel"
+              name="contactNumber"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              error={errors.contactNumber}
+              required
+              placeholder="Enter contact number"
+            />
             </div>
 
             <FormInput

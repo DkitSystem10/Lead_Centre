@@ -46,6 +46,35 @@ Lead_Centre/
 └── vite.config.js
 ```
 
+## Environment Variables Setup
+
+Before running the application, you need to set up Supabase environment variables.
+
+### For Local Development
+
+1. Create a `.env` file in the root directory:
+   ```bash
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+2. Get your Supabase credentials from your Supabase project dashboard:
+   - Go to **Settings** → **API**
+   - Copy **Project URL** → `VITE_SUPABASE_URL`
+   - Copy **anon/public key** → `VITE_SUPABASE_ANON_KEY`
+
+### For Vercel Deployment
+
+1. Go to your Vercel project dashboard
+2. Navigate to **Settings** → **Environment Variables**
+3. Add the following variables:
+   - `VITE_SUPABASE_URL` = `https://your-project-id.supabase.co`
+   - `VITE_SUPABASE_ANON_KEY` = `your-anon-key-here`
+4. Select **Production**, **Preview**, and **Development** environments
+5. Click **Save** and **Redeploy**
+
+See `VERCEL_DEPLOYMENT.md` for detailed instructions.
+
 ## Installation
 
 1. Install dependencies:

@@ -266,8 +266,8 @@ const LandingPage = () => {
                 <div className="relative flex items-center justify-center">
                   {/* Rotating container */}
                   <div className="rotating-letters-container">
-                    {/* Connecting lines SVG */}
-                    <svg ref={svgRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible' }}>
+                    {/* Connecting lines SVG - Hidden */}
+                    <svg ref={svgRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ overflow: 'visible', display: 'none' }}>
                       <defs>
                         <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                           <stop offset="0%" stopColor="#3D98B4" stopOpacity="0.4" />
@@ -275,7 +275,7 @@ const LandingPage = () => {
                           <stop offset="100%" stopColor="#3D98B4" stopOpacity="0.4" />
                         </linearGradient>
                       </defs>
-                      {/* Lines connecting letters */}
+                      {/* Lines connecting letters - Hidden */}
                       <line stroke="url(#lineGradient)" strokeWidth="2" className="connecting-line" />
                       <line stroke="url(#lineGradient)" strokeWidth="2" className="connecting-line" />
                       <line stroke="url(#lineGradient)" strokeWidth="2" className="connecting-line" />
