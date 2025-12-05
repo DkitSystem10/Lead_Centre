@@ -11,6 +11,7 @@ import CareerGuidancePage from './pages/CareerGuidancePage'
 import SuccessPageWrapper from './pages/SuccessPage'
 import ContactPage from './pages/ContactPage'
 import GeneralEnquiryPage from './pages/GeneralEnquiryPage'
+import ReportsPage from './pages/ReportsPage'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/career-guidance" element={<CareerGuidancePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/general-enquiry" element={<GeneralEnquiryPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
           <Route path="/success" element={<SuccessPageWrapper />} />
         </Routes>
       </Layout>

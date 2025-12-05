@@ -38,6 +38,11 @@ const Sidebar = ({ isOpen, onClose, showOnDesktop = true }) => {
       title: 'Career Guidance',
       path: '/career-guidance',
       icon: null
+    },
+    {
+      title: 'Report',
+      path: '/reports',
+      icon: null
     }
   ]
 
